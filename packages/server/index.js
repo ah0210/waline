@@ -4,6 +4,7 @@ const path = require('node:path');
 const Application = require('thinkjs');
 const Loader = require('thinkjs/lib/loader');
 
+// oxlint-disable-next-line func-names
 module.exports = function (configParams = {}) {
   const { env, ...config } = configParams;
 
@@ -20,6 +21,7 @@ module.exports = function (configParams = {}) {
 
   loader.loadAll('worker');
 
+  // oxlint-disable-next-line func-names
   return function (req, res) {
     for (const k in config) {
       // fix https://github.com/walinejs/waline/issues/2649 with alias model config name

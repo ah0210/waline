@@ -4,12 +4,13 @@ const { getMarkdownParser } = require('../service/markdown/index.js');
 
 const markdownParser = getMarkdownParser();
 
-async function formatCmt(
+// oxlint-disable-next-line max-statements
+const formatCmt = async (
   { ua, ip, ...comment },
   users = [],
   { avatarProxy, deprecated },
   loginUser,
-) {
+) => {
   ua = think.uaParser(ua);
   if (!think.config('disableUserAgent')) {
     comment.browser = `${ua.browser.name || ''}${(ua.browser.version || '')
@@ -33,7 +34,7 @@ async function formatCmt(
 
   comment.avatar =
     avatarProxy && !avatarUrl.includes(avatarProxy)
-      ? avatarProxy + '?url=' + encodeURIComponent(avatarUrl)
+      ? `${avatarProxy}?url=${encodeURIComponent(avatarUrl)}`
       : avatarUrl;
 
   const isAdmin = loginUser && loginUser.type === 'administrator';
@@ -67,7 +68,7 @@ async function formatCmt(
   delete comment.updatedAt;
 
   return comment;
-}
+};
 
 module.exports = class extends BaseRest {
   constructor(ctx) {

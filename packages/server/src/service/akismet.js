@@ -2,6 +2,7 @@ const Akismet = require('akismet');
 
 const DEFAULT_KEY = '70542d86693e';
 
+// oxlint-disable-next-line func-names
 module.exports = function (comment, blog) {
   let { AKISMET_KEY, SITE_URL } = process.env;
 
@@ -13,9 +14,11 @@ module.exports = function (comment, blog) {
     return Promise.resolve(false);
   }
 
+  // oxlint-disable-next-line func-names
   return new Promise(function (resolve, reject) {
     const akismet = Akismet.client({ blog, apiKey: AKISMET_KEY });
 
+    // oxlint-disable-next-line func-names
     akismet.verifyKey(function (err, verifyKey) {
       if (err) {
         return reject(err);
@@ -30,6 +33,7 @@ module.exports = function (comment, blog) {
           comment_author: comment.nick,
           comment_content: comment.comment,
         },
+        // oxlint-disable-next-line func-names
         function (err, spam) {
           if (err) {
             return reject(err);

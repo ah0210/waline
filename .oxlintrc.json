@@ -6,8 +6,7 @@
     "dist/",
     "example/",
     "**/.vuepress/utils/transform/",
-    "**/.vuepress/utils/csv.js",
-    "packages/server/"
+    "**/.vuepress/utils/csv.js"
   ],
   "plugins": ["typescript", "oxc", "import", "jsdoc", "promise", "unicorn", "node"],
   "rules": {
@@ -65,7 +64,14 @@
         "jsdoc/check-tag-names": [
           "warn",
           {
-            "definedTags": ["apiParam", "apiSuccess", "apiVersion", "api", "apiGroup"]
+            "definedTags": [
+              "apiParam",
+              "apiSuccess",
+              "apiSuccessExample",
+              "apiVersion",
+              "api",
+              "apiGroup"
+            ]
           }
         ]
       }
