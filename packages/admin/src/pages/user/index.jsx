@@ -30,8 +30,8 @@ export default function () {
         key: 'administrator',
         name: t('set administrator'),
         show: user.type === 'guest',
-        async action(e) {
-          e.preventDefault();
+        async action(event) {
+          event.preventDefault();
 
           await updateUser({
             id: user.objectId,
@@ -45,8 +45,8 @@ export default function () {
         key: 'guest',
         name: t('set guest'),
         show: user.type === 'administrator',
-        async action(e) {
-          e.preventDefault();
+        async action(event) {
+          event.preventDefault();
           if (user.objectId === currentUser.objectId) {
             return alert(t("You can't set yourself to be guest!"));
           }
@@ -63,8 +63,8 @@ export default function () {
         key: 'label',
         name: t('set label'),
         show: true,
-        async action(e) {
-          e.preventDefault();
+        async action(event) {
+          event.preventDefault();
 
           const label = prompt(t('please enter an exclusive label'));
 

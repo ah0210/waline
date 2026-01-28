@@ -38,15 +38,15 @@ export default function () {
     navigate(redirect.replaceAll(/\/+/g, '/'));
   }, [user]);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setError(false);
     setLoading(true);
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const code = e.target.code ? e.target.code.value : '';
-    const remember = e.target.remember.checked;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const code = event.target.code ? event.target.code.value : '';
+    const remember = event.target.remember.checked;
 
     if (!email) {
       return setError(t('please input email'));
@@ -54,7 +54,7 @@ export default function () {
     if (!password) {
       return setError(t('please input password'));
     }
-    if (e.target.code && !code) {
+    if (event.target.code && !code) {
       return setError(t('please input 2fa code'));
     }
 
@@ -76,8 +76,8 @@ export default function () {
     }
   };
 
-  const check2FACode = async (e) => {
-    const email = e.target.value;
+  const check2FACode = async (event) => {
+    const email = event.target.value;
 
     if (!email) {
       return;

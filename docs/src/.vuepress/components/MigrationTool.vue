@@ -80,7 +80,7 @@ const click = (): void => {
       text = JSON.stringify(text, null, '\t');
     }
 
-    exportRaw('output.' + (to.value !== 'wsql' ? 'json' : 'csv'), text as string);
+    exportRaw(`output.${to.value === 'wsql' ? 'csv' : 'json'}`, text as string);
   }
 };
 </script>

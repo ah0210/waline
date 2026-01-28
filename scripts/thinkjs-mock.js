@@ -1,5 +1,5 @@
 // add think as global variable
-global.think = {
+globalThis.think = {
   config: (name) => {
     if (name === 'domPurify') return {};
   },

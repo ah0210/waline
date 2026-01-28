@@ -8,20 +8,22 @@ import Header from '../../components/Header.jsx';
 import * as Icons from '../../components/icon/index.js';
 import { updateProfile } from '../../services/user.js';
 
-export default function () {
+// oxlint-disable-next-line max-lines-per-function
+export default function Profile() {
   const [isPasswordUpdating, setPasswordUpdating] = useState(false);
   const [isProfileUpdating, setProfileUpdating] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  // oxlint-disable-next-line id-length
   const { t } = useTranslation();
 
-  const onProfileUpdate = async (e) => {
-    e.preventDefault();
+  const onProfileUpdate = async (event) => {
+    event.preventDefault();
 
-    const display_name = e.target.screenName.value;
-    const url = e.target.url.value;
-    const label = e.target.label.value;
-    const email = e.target.email.value;
+    const display_name = event.target.screenName.value;
+    const url = event.target.url.value;
+    const label = event.target.label.value;
+    const email = event.target.email.value;
 
     if (!display_name || !url) {
       return alert(t('nickname and homepage are required'));
@@ -37,11 +39,11 @@ export default function () {
     }
   };
 
-  const onPasswordUpdate = async (e) => {
-    e.preventDefault();
+  const onPasswordUpdate = async (event) => {
+    event.preventDefault();
 
-    const password = e.target.password.value;
-    const confirm = e.target.confirm.value;
+    const password = event.target.password.value;
+    const confirm = event.target.confirm.value;
 
     if (!password || !confirm) {
       return alert(t('please input password'));
@@ -61,8 +63,8 @@ export default function () {
     location.reload();
   };
 
-  const changeAvatar = async (e) => {
-    e.preventDefault();
+  const changeAvatar = async (event) => {
+    event.preventDefault();
 
     const url = prompt(t('please input avatar url'));
 
@@ -104,7 +106,6 @@ export default function () {
             <div className="col-mb-12 col-tb-3">
               <p>
                 <a
-                  href="javascript:void(0)"
                   title={t('change avatar')}
                   target="_blank"
                   rel="noreferrer"
@@ -217,7 +218,7 @@ export default function () {
                         href={
                           user[social]
                             ? social === 'oidc'
-                              ? 'javascript:void(0)'
+                              ? ''
                               : `https://${social}.com/${user[social]}`
                             : `${baseUrl}oauth?type=${social}&state=${token}`
                         }

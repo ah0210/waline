@@ -16,10 +16,10 @@ export default function () {
     get2FAToken().then(setData);
   }, []);
 
-  const on2faUpdate = async (e) => {
-    e.preventDefault();
+  const on2faUpdate = async (event) => {
+    event.preventDefault();
 
-    const code = e.target.code.value;
+    const code = event.target.code.value;
 
     if (!code || code.length < 6 || code.length > 6) {
       return alert(t('minimum 6 characters required'));

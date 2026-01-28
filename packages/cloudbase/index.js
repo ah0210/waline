@@ -13,6 +13,7 @@ const instance = new Application({
   env: 'cloudbase',
 });
 
+// oxlint-disable-next-line func-names
 module.exports = function (config = {}) {
   const loader = new Loader(instance.options);
 

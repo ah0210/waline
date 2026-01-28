@@ -24,23 +24,23 @@ export default function () {
     }
   }, [navigate]);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setError(false);
 
-    const nick = e.target.nick.value;
+    const nick = event.target.nick.value;
 
     if (!nick || nick.length < 2) {
       return setError(t('nickname illegal'));
     }
-    const email = e.target.email.value;
+    const email = event.target.email.value;
 
     if (!email) {
       return setError(t('please input email'));
     }
-    const link = e.target.link.value;
-    const password = e.target.password.value;
-    const passwordAgain = e.target['password-again'].value;
+    const link = event.target.link.value;
+    const password = event.target.password.value;
+    const passwordAgain = event.target['password-again'].value;
 
     if (!password || !passwordAgain || passwordAgain !== password) {
       return setError(t("passwords don't match"));

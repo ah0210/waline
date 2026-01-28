@@ -20,9 +20,9 @@ export default function () {
     uploadRef.current.click();
   };
 
-  const importData = async (e) => {
+  const importData = async (event) => {
     try {
-      const text = await readFileAsync(e.target.files[0]);
+      const text = await readFileAsync(event.target.files[0]);
       const data = JSON.parse(text);
 
       if (!data || data.type !== 'waline') {
@@ -153,7 +153,7 @@ export default function () {
       throw err;
     } finally {
       setImportLoading(false);
-      e.target.value = null;
+      event.target.value = null;
     }
   };
 

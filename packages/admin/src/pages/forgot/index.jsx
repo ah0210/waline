@@ -19,11 +19,11 @@ export default function () {
     }
   }, [navigate]);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setError(false);
 
-    const email = e.target.email.value;
+    const email = event.target.email.value;
 
     if (!email) {
       return setError(t('please input email'));

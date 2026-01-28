@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// oxlint-disable import/max-dependencies
 import { useDebounceFn, useEventListener, watchImmediate } from '@vueuse/core';
 import type { WalineComment, WalineCommentData, UserInfo } from '@waline/api';
 import { addComment, login, updateComment } from '@waline/api';
@@ -205,6 +206,7 @@ const onImageChange = (): void => {
     });
 };
 
+// oxlint-disable-next-line max-statements
 const submitComment = async (): Promise<void> => {
   const { serverURL, lang, login, wordLimit, requiredMeta, recaptchaV3Key, turnstileKey } =
     config.value;
@@ -443,13 +445,13 @@ watchImmediate([config, wordNumber], ([config, wordNumber]) => {
 
   if (limit) {
     if (wordNumber < limit[0] && limit[0] !== 0) {
-      wordLimit.value = limit[0];
+      [wordLimit.value] = limit;
       isWordNumberLegal.value = false;
     } else if (wordNumber > limit[1]) {
-      wordLimit.value = limit[1];
+      [, wordLimit.value] = limit;
       isWordNumberLegal.value = false;
     } else {
-      wordLimit.value = limit[1];
+      [, wordLimit.value] = limit;
       isWordNumberLegal.value = true;
     }
   } else {

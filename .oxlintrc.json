@@ -6,10 +6,13 @@
     "dist/",
     "example/",
     "**/.vuepress/utils/transform/",
-    "**/.vuepress/utils/csv.js"
+    "**/.vuepress/utils/csv.js",
+    "packages/server/"
   ],
   "plugins": ["typescript", "oxc", "import", "jsdoc", "promise", "unicorn", "node"],
-  "rules": {},
+  "rules": {
+    "no-warning-comments": "off"
+  },
   "overrides": [
     {
       "files": ["**/*.ts"],
@@ -22,13 +25,8 @@
       "files": ["packages/admin/src/**"],
       "plugins": ["react"],
       "rules": {
-        "prefer-global-this": "off"
-      }
-    },
-    {
-      "files": ["packages/api/src/**"],
-      "rules": {
-        "no-warning-comments": "off"
+        "prefer-global-this": "off",
+        "react/jsx-max-depth": "off"
       }
     },
     {

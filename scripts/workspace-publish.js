@@ -39,7 +39,7 @@ const getPkgs = async (pkgDir) => {
   return new Map(dirs);
 };
 
-function setPkg(pkg, pkgs) {
+const setPkg = (pkg, pkgs) => {
   const pkgMap = pkgs.get(pkg);
 
   if (!pkgMap) return;
@@ -77,9 +77,10 @@ function setPkg(pkg, pkgs) {
 
   const handler = isCI
     ? fs.writeFileSync.bind(fs, path.join(pkgMap.dirname, 'package.json'))
-    : console.log.bind(console);
+    : // oxlint-disable-next-line no-console
+      console.log.bind(console);
 
-  if (writeFlag) handler(JSON.stringify(pkgMap.info, null, 2) + '\n');
-}
+  if (writeFlag) handler(`${JSON.stringify(pkgMap.info, null, 2)}\n`);
+};
 
 setPkg(process.argv[2], await getPkgs(packagesDir));

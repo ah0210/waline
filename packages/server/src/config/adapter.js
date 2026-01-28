@@ -6,6 +6,7 @@ const Postgresql = require('think-model-postgresql');
 let Sqlite;
 
 try {
+  // oxlint-disable-next-line node/global-require
   Sqlite = require('think-model-sqlite');
 } catch (err) {
   // eslint-disable-next-line @typescript-eslint/no-extraneous-class
@@ -114,7 +115,7 @@ exports.model = {
     connectionLimit: 1,
     prefix: PG_PREFIX || POSTGRES_PREFIX || 'wl_',
     ssl:
-      (PG_SSL || POSTGRES_SSL) == 'true' || POSTGRES_URL?.includes('sslmode=require')
+      (PG_SSL || POSTGRES_SSL) === 'true' || POSTGRES_URL?.includes('sslmode=require')
         ? {
             rejectUnauthorized: false,
           }

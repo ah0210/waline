@@ -247,7 +247,7 @@ module.exports = class extends BaseRest {
       if (think.isEmpty(comments)) {
         continue;
       }
-      const comment = comments[0];
+      const [comment] = comments;
 
       if (think.isEmpty(comment)) {
         continue;
