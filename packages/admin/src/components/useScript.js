@@ -101,4 +101,4 @@ export default function useScript({ src, checkForExisting = false, ...attributes
   return [loading, error];
 }
 
-const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+const isBrowser = typeof window !== 'undefined' && Boolean(window.document);

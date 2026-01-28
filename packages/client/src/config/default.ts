@@ -85,9 +85,11 @@ export const getDefaultSearchOptions = (lang: string): WalineSearchOptions => {
 
   return {
     search: (word: string): Promise<WalineSearchResult> =>
+      // oxlint-disable-next-line id-length
       fetchGiphy('search', { q: word, offset: '0' }),
     default: (): Promise<WalineSearchResult> => fetchGiphy('trending', {}),
     more: (word: string, offset = 0): Promise<WalineSearchResult> =>
+      // oxlint-disable-next-line id-length
       fetchGiphy('search', { q: word, offset: offset.toString() }),
   };
 };

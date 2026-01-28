@@ -53,6 +53,7 @@ const getWordLimit = (wordLimit: WalineProps['wordLimit']): [number, number] | f
   Array.isArray(wordLimit) ? wordLimit : wordLimit ? [0, wordLimit] : false;
 
 const fallback = <T = unknown>(value: T | boolean | undefined, fallback: T): T | null =>
+  // oxlint-disable-next-line eqeqeq
   value == undefined || value === true ? fallback : value === false ? null : value;
 
 export const getConfig = ({

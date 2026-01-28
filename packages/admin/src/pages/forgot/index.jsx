@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router';
 
 import Header from '../../components/Header.jsx';
 
-export default function () {
+export default function Forgot() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -71,6 +71,7 @@ const getCommentData = (pageNumber: number): void => {
       page.value = pageNumber;
       totalPages.value = resp.totalPages;
     })
+    // oxlint-disable-next-line promise/prefer-await-to-callbacks
     .catch((err: unknown) => {
       if ((err as Error).name !== 'AbortError') {
         // eslint-disable-next-line no-console

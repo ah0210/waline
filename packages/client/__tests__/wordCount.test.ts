@@ -54,9 +54,7 @@ describe('Words test', () => {
     const linkMarkdown = `You can found Waline [here](${linkAddress}).`;
     const imageMarkdown = `Here is a image.\n\n![Alt](https://a/fake/link)`;
 
-    const linkWords = (getWords(linkAddress) ?? [])
-      .map((word) => word.trim())
-      .filter((word) => word);
+    const linkWords = (getWords(linkAddress) ?? []).map((word) => word.trim()).filter(Boolean);
 
     expect(linkWords).toEqual(['unpkg.com', 'waline', 'client', 'dist', 'Waline.min.js']);
 
@@ -91,9 +89,7 @@ describe('Words test', () => {
 \`\`\`
 `;
 
-    const codeBlockWords = (getWords(codeBlock) ?? [])
-      .map((word) => word.trim())
-      .filter((word) => word);
+    const codeBlockWords = (getWords(codeBlock) ?? []).map((word) => word.trim()).filter(Boolean);
 
     expect(codeBlockWords).toEqual([
       'html',

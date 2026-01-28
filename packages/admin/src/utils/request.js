@@ -1,5 +1,6 @@
 import I18n from 'i18next';
 
+// oxlint-disable-next-line max-statements
 export default async function request(url, opts = {}) {
   if (typeof url === 'object') {
     opts = url;

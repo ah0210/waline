@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 
 import { gen2FAToken, get2FAToken, updateProfile } from '../../services/user.js';
 
-export default function () {
+// oxlint-disable-next-line max-lines-per-function
+export default function TwoFactorAuth() {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [updating, setUpdating] = useState(false);

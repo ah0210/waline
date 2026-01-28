@@ -29,7 +29,7 @@ export const markedTeXExtensions = (texRenderer: WalineTeXRenderer): TokenizerEx
     start(src: string) {
       const idx = src.search(inlineMathStart);
 
-      return idx !== -1 ? idx : src.length;
+      return idx === -1 ? src.length : idx;
     },
     tokenizer(src: string) {
       const cap = inlineMathReg.exec(src);
@@ -41,8 +41,6 @@ export const markedTeXExtensions = (texRenderer: WalineTeXRenderer): TokenizerEx
           text: texRenderer(false, cap[1]),
         };
       }
-
-      return;
     },
   };
 

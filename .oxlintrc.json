@@ -19,6 +19,8 @@
           // sorting
           "a",
           "b",
+          // svg path
+          "d",
           // loops
           "i",
           "j",

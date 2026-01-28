@@ -70,7 +70,7 @@ const getColumnCount = (): number => {
   return count > 0 ? count : 1;
 };
 
-const createColumns = (count: number): Column[] => new Array(count).fill(null).map(() => []);
+const createColumns = (count: number): Column[] => Array.from({ length: count }, () => []);
 
 const fillColumns = async (itemIndex: number): Promise<void> => {
   if (itemIndex >= props.items.length) return;
