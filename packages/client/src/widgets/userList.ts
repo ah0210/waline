@@ -90,7 +90,7 @@ export const UserList = ({
     lang,
     signal: controller.signal,
   }).then((users) => {
-    if (!root || !users.length)
+    if (!root || users.length === 0)
       return {
         users,
         destroy: (): void => controller.abort(),

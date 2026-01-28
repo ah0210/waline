@@ -23,7 +23,7 @@ export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLoc
   if (!date) return '';
 
   const time = isString(date)
-    ? new Date(date.includes(' ') ? date.replace(/-/g, '/') : date)
+    ? new Date(date.includes(' ') ? date.replaceAll('-', '/') : date)
     : date;
 
   const timePassed = now.getTime() - time.getTime();

@@ -20,7 +20,7 @@ export const user = {
       }
       if (window.opener) {
         const localToken = localStorage.getItem('TOKEN');
-        const remember = !!localToken;
+        const remember = Boolean(localToken);
         const token = localToken || window.TOKEN || sessionStorage.getItem('token');
 
         window.opener.postMessage({ type: 'userInfo', data: { token, remember, ...user } }, '*');

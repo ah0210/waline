@@ -34,15 +34,17 @@ module.exports = {
   },
   promiseAllQueue(promises, taskNum) {
     return new Promise((resolve, reject) => {
-      if (!promises.length) {
-        return resolve();
+      if (promises.length === 0) {
+        resolve();
+
+        return;
       }
 
       const ret = [];
       let index = 0;
       let count = 0;
 
-      function runTask() {
+      const runTask = () => {
         const idx = index;
 
         index += 1;
@@ -59,7 +61,7 @@ module.exports = {
 
           return runTask();
         }, reject);
-      }
+      };
 
       for (let i = 0; i < taskNum; i++) {
         runTask();
@@ -78,7 +80,7 @@ module.exports = {
       }
       const { region } = result;
       const [, , province, city, isp] = region.split('|');
-      const address = Array.from(new Set([province, city, isp].filter((v) => v)));
+      const address = [...new Set([province, city, isp].filter((v) => v))];
 
       return address.slice(0, depth).join(' ');
     } catch (err) {

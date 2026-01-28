@@ -73,12 +73,14 @@ export default function () {
             await updateComment(comment.objectId, { status: 'approved' });
             list.data = list.data.filter(({ objectId }) => objectId !== comment.objectId);
             switch (comment.status) {
-              case 'waiting':
+              case 'waiting': {
                 list.waitingCount -= 1;
                 break;
-              case 'spam':
+              }
+              case 'spam': {
                 list.spamCount -= 1;
                 break;
+              }
             }
             setList({ ...list });
           } else {
@@ -507,7 +509,9 @@ export default function () {
                                       nick
                                     ) : (
                                       <a
-                                        href={!/^https:\/\//.test(link) ? 'https://' + link : link}
+                                        href={
+                                          !link.startsWith('https://') ? 'https://' + link : link
+                                        }
                                         rel="external nofollow noreferrer"
                                         target="_blank"
                                       >

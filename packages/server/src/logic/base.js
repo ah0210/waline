@@ -13,15 +13,15 @@ module.exports = class extends think.Logic {
 
   async __before() {
     const referrer = this.ctx.referrer(true);
-    let origin = this.ctx.origin;
+    let { origin } = this.ctx;
 
     if (origin) {
       try {
         const parsedOrigin = new URL(origin);
 
         origin = parsedOrigin.hostname;
-      } catch (e) {
-        console.error('Invalid origin format:', origin, e);
+      } catch (err) {
+        console.error('Invalid origin format:', origin, err);
       }
     }
 
@@ -50,8 +50,8 @@ module.exports = class extends think.Logic {
           if (typeof domain === 'string' && domain.startsWith('/') && domain.endsWith('/')) {
             try {
               return new RegExp(domain.slice(1, -1)); // 去掉斜杠并创建 RegExp 对象
-            } catch (e) {
-              console.error('Invalid regex pattern in secureDomains:', domain, e);
+            } catch (err) {
+              console.error('Invalid regex pattern in secureDomains:', domain, err);
 
               return null;
             }
@@ -84,8 +84,8 @@ module.exports = class extends think.Logic {
 
     try {
       userId = jwt.verify(token, think.config('jwtKey'));
-    } catch (e) {
-      think.logger.debug(e);
+    } catch (err) {
+      think.logger.debug(err);
     }
 
     if (think.isEmpty(userId) || !think.isString(userId)) {
@@ -136,7 +136,7 @@ module.exports = class extends think.Logic {
     const filename = this.__filename || __filename;
     const last = filename.lastIndexOf(path.sep);
 
-    return filename.substr(last + 1, filename.length - last - 4);
+    return filename.slice(last + 1, filename.length - last - 4);
   }
 
   getId() {

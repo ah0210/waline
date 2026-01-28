@@ -38,7 +38,7 @@ async function run() {
   const container = document.createElement('div');
 
   container.style.height = '100%';
-  document.body.appendChild(container);
+  document.body.append(container);
 
   const root = ReactDOM.createRoot(container);
 

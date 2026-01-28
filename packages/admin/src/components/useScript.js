@@ -20,7 +20,7 @@ const checkExisting = (src) => {
     });
   }
 
-  return undefined;
+  return;
 };
 
 export default function useScript({ src, checkForExisting = false, ...attributes }) {
@@ -54,7 +54,7 @@ export default function useScript({ src, checkForExisting = false, ...attributes
     let scriptEl;
 
     if (status) {
-      scriptEl = status.scriptEl;
+      ({ scriptEl } = status);
     } else {
       scriptEl = document.createElement('script');
       scriptEl.src = src;
@@ -89,7 +89,7 @@ export default function useScript({ src, checkForExisting = false, ...attributes
     scriptEl.addEventListener('load', handleLoad);
     scriptEl.addEventListener('error', handleError);
 
-    document.body.appendChild(scriptEl);
+    document.body.append(scriptEl);
 
     return () => {
       scriptEl.removeEventListener('load', handleLoad);

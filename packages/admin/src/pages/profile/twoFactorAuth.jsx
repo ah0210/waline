@@ -28,8 +28,8 @@ export default function () {
     try {
       setUpdating(true);
       await gen2FAToken({ code, secret: data.secret });
-    } catch (e) {
-      alert(e);
+    } catch (err) {
+      alert(err);
     } finally {
       setUpdating(false);
       location.reload();
@@ -42,10 +42,10 @@ export default function () {
     }
 
     setUpdating(true);
-    await updateProfile({ ['2fa']: '' }).catch((reason) => {
-      alert(reason);
+    await updateProfile({ ['2fa']: '' }).catch((err) => {
+      alert(err);
       // eslint-disable-next-line no-console
-      console.error(reason);
+      console.error(err);
     });
     setUpdating(false);
     location.reload();

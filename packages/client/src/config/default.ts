@@ -7,10 +7,10 @@ import type {
   WalineSearchResult,
 } from '../typings/index.js';
 
-const AVAILABLE_META: WalineMeta[] = ['nick', 'mail', 'link'];
+const AVAILABLE_META = new Set<WalineMeta>(['nick', 'mail', 'link']);
 
 export const getMeta = (meta: WalineMeta[]): WalineMeta[] =>
-  meta.filter((item) => AVAILABLE_META.includes(item));
+  meta.filter((item) => AVAILABLE_META.has(item));
 
 export const DEFAULT_EMOJI: WalineEmojiPresets[] = ['//unpkg.com/@waline/emojis@1.1.0/weibo'];
 

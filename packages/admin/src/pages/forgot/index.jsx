@@ -19,7 +19,7 @@ export default function () {
     }
   }, [navigate]);
 
-  const onSubmit = async function (e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 

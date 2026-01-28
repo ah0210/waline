@@ -33,11 +33,11 @@ export default function () {
       });
   }, [user?.email]);
 
-  const updateLanguage = function (e) {
+  const updateLanguage = (e) => {
     i18n.changeLanguage(e.target.value);
   };
 
-  const onLogout = function (e) {
+  const onLogout = (e) => {
     e.preventDefault();
     dispatch.user.logout();
     navigate('/ui/login');

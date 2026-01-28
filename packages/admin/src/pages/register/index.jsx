@@ -24,7 +24,7 @@ export default function () {
     }
   }, [navigate]);
 
-  const onSubmit = async function (e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 
@@ -62,8 +62,8 @@ export default function () {
         alert(t('register success! please go to your mailbox to verify it!'));
       }
       navigate('/ui/login');
-    } catch (e) {
-      setError(e.message);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setSubmitting(false);
     }

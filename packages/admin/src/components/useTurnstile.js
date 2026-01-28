@@ -25,8 +25,8 @@ export function useTurnstile({ sitekey, checkForExisting = true }) {
     });
   }, []);
 
-  return (action) => {
-    return new Promise((resolve, reject) => {
+  return (action) =>
+    new Promise((resolve, reject) => {
       if (!turnstile) {
         return reject(new Error('Turnstile script not available'));
       }
@@ -37,5 +37,4 @@ export function useTurnstile({ sitekey, checkForExisting = true }) {
         callback: resolve,
       });
     });
-  };
 }

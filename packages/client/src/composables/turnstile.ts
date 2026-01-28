@@ -32,7 +32,7 @@ export const useTurnstile = (key: string): Turnstile => {
 
     await load();
 
-    const turnstile = window.turnstile;
+    const { turnstile } = window;
 
     return new Promise((resolve) => {
       turnstile?.ready(() => {

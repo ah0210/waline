@@ -71,7 +71,7 @@ export default hope(
     },
 
     rules: {
-      'import-x/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
+      'import-x/no-unresolved': ['error', { ignore: [String.raw`\.svg\?react$`] }],
     },
   },
 

@@ -78,7 +78,7 @@ const fillColumns = async (itemIndex: number): Promise<void> => {
   await nextTick();
 
   // @ts-expect-error: Type is Element not HTMLElement
-  const columnDivs = Array.from<HTMLElement>(wall.value?.children ?? []);
+  const columnDivs = [...(wall.value?.children ?? [])];
 
   const target = columnDivs.reduce((prev, curr) =>
     curr.getBoundingClientRect().height < prev.getBoundingClientRect().height ? curr : prev,
@@ -94,7 +94,7 @@ const redraw = async (force = false): Promise<void> => {
 
   columns.value = createColumns(getColumnCount());
 
-  const scrollY = window.scrollY;
+  const { scrollY } = window;
 
   await fillColumns(0);
 

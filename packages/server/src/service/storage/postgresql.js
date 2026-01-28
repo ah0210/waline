@@ -67,8 +67,8 @@ module.exports = class extends MySQL {
       } else {
         result = parseInt(result);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
 
     return result;

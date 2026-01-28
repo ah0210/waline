@@ -63,18 +63,18 @@ class Github {
       },
     )
       .then((resp) => resp.json())
-      .catch((e) => {
-        const isTooLarge = e.message.includes('"too_large"');
+      .catch((err) => {
+        const isTooLarge = err.message.includes('"too_large"');
 
         if (!isTooLarge) {
-          throw e;
+          throw err;
         }
 
         return this.getLargeFile(filename);
       });
 
     return {
-      data: Buffer.from(resp.content, 'base64').toString('utf-8'),
+      data: Buffer.from(resp.content, 'base64').toString('utf8'),
       sha: resp.sha,
     };
   }
@@ -121,7 +121,7 @@ class Github {
       body: JSON.stringify({
         sha,
         message: 'feat(waline): update comment data',
-        content: Buffer.from(content, 'utf-8').toString('base64'),
+        content: Buffer.from(content, 'utf8').toString('base64'),
       }),
     });
   }
@@ -140,11 +140,11 @@ module.exports = class extends Base {
 
   async collection(tableName) {
     const filename = path.join(this.basePath, tableName + '.csv');
-    const file = await this.git.get(filename).catch((e) => {
-      if (e.statusCode === 404) {
+    const file = await this.git.get(filename).catch((err) => {
+      if (err.statusCode === 404) {
         return '';
       }
-      throw e;
+      throw err;
     });
 
     return new Promise((resolve, reject) => {
@@ -203,12 +203,14 @@ module.exports = class extends Base {
       const handler = where[k][0].toUpperCase();
 
       switch (handler) {
-        case 'IN':
+        case 'IN': {
           filters.push((item) => where[k][1].includes(item[k]));
           break;
-        case 'NOT IN':
+        }
+        case 'NOT IN': {
           filters.push((item) => !where[k][1].includes(item[k]));
           break;
+        }
         case 'LIKE': {
           const first = where[k][1][0];
           const last = where[k][1].slice(-1);
@@ -224,12 +226,14 @@ module.exports = class extends Base {
           filters.push((item) => reg.test(item[k]));
           break;
         }
-        case '!=':
+        case '!=': {
           filters.push((item) => item[k] !== where[k][1]);
           break;
-        case '>':
+        }
+        case '>': {
           filters.push((item) => item[k] >= where[k][1]);
           break;
+        }
       }
     }
 
@@ -314,7 +318,7 @@ module.exports = class extends Base {
     // FIXME: The loop is weird @lizheming
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < data.length; i++) {
-      const key = group.map((field) => data[field]).join();
+      const key = group.map((field) => data[field]).join(',');
 
       if (!counts[key]) {
         counts[key] = { count: 0 };
@@ -333,7 +337,7 @@ module.exports = class extends Base {
     // { access: { read = true, write = true } = { read: true, write: true } } = {}
   ) {
     const instance = await this.collection(this.tableName);
-    const id = Math.random().toString(36).substr(2, 15);
+    const id = Math.random().toString(36).slice(2, 15);
 
     instance.push({ ...data, id });
     await this.save(this.tableName, instance, instance.sha);
@@ -364,8 +368,8 @@ module.exports = class extends Base {
   async delete(where) {
     const instance = await this.collection(this.tableName);
     const deleteData = this.where(instance, where);
-    const deleteId = deleteData.map(({ id }) => id);
-    const data = instance.filter((data) => !deleteId.includes(data.id));
+    const deleteId = new Set(deleteData.map(({ id }) => id));
+    const data = instance.filter((data) => !deleteId.has(data.id));
 
     await this.save(this.tableName, data, instance.sha);
   }

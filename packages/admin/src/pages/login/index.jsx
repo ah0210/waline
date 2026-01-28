@@ -35,10 +35,10 @@ export default function () {
     const defaultRedirect = isAdmin ? '/ui/profile' : '/ui';
     const redirect = isAdmin && query.get('redirect') ? query.get('redirect') : defaultRedirect;
 
-    navigate(redirect.replace(/\/+/g, '/'));
+    navigate(redirect.replaceAll(/\/+/g, '/'));
   }, [user]);
 
-  const onSubmit = async function (e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError(false);
     setLoading(true);

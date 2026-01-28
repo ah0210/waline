@@ -20,8 +20,6 @@ export const markedTeXExtensions = (texRenderer: WalineTeXRenderer): TokenizerEx
           text: texRenderer(true, cap[1]),
         };
       }
-
-      return undefined;
     },
   };
 
@@ -44,7 +42,7 @@ export const markedTeXExtensions = (texRenderer: WalineTeXRenderer): TokenizerEx
         };
       }
 
-      return undefined;
+      return;
     },
   };
 

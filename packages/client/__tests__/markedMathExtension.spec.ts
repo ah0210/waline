@@ -54,15 +54,15 @@ describe('Should parse inline tex', () => {
       '<p>Here is a single tex <span class="wl-tex">TeX is not available in preview</span> in the sentence</p>\n',
     );
 
-    expect(marked.parse('$-\\sqrt{x}$')).toEqual(
+    expect(marked.parse(String.raw`$-\sqrt{x}$`)).toEqual(
       '<p><span class="wl-tex">TeX is not available in preview</span></p>\n',
     );
 
-    expect(marked.parse('$-\\sqrt{x}$ is at beginning')).toEqual(
+    expect(marked.parse(String.raw`$-\sqrt{x}$ is at beginning`)).toEqual(
       '<p><span class="wl-tex">TeX is not available in preview</span> is at beginning</p>\n',
     );
 
-    expect(marked.parse('Here ends a single tex $-\\sqrt{x}$')).toEqual(
+    expect(marked.parse(String.raw`Here ends a single tex $-\sqrt{x}$`)).toEqual(
       '<p>Here ends a single tex <span class="wl-tex">TeX is not available in preview</span></p>\n',
     );
   });

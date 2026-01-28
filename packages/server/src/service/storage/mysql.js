@@ -25,7 +25,7 @@ module.exports = class extends Base {
       }
 
       if (Array.isArray(filter[k])) {
-        if (filter[k][0] === 'IN' && !filter[k][1].length) {
+        if (filter[k][0] === 'IN' && filter[k][1].length === 0) {
           continue;
         }
         if (think.isDate(filter[k][1])) {

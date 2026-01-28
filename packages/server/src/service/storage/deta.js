@@ -38,7 +38,7 @@ module.exports = class extends Base {
     const items = await this.select({}, { limit: 1 });
     let lastKey;
 
-    if (items.length && !isNaN(parseInt(items[0].objectId))) {
+    if (items.length > 0 && !isNaN(parseInt(items[0].objectId))) {
       lastKey = parseInt(items[0].objectId);
     } else {
       lastKey = Number.MAX_SAFE_INTEGER - performance.now();
@@ -71,13 +71,14 @@ module.exports = class extends Base {
       const handler = where[k][0].toUpperCase();
 
       switch (handler) {
-        case 'IN':
+        case 'IN': {
           conditions[parseKey(k)] = where[k][1];
           if (think.isArray(where[k][1])) {
             _isArrayKeys.push(parseKey(k));
           }
           break;
-        case 'NOT IN':
+        }
+        case 'NOT IN': {
           /**
            * deta base doesn't support not equal with multiple value query
            * so we have to transfer it into equal with some value in most of scene
@@ -93,6 +94,7 @@ module.exports = class extends Base {
           }
           conditions[parseKey(k) + '?ne'] = where[k][1];
           break;
+        }
         case 'LIKE': {
           const first = where[k][1][0];
           const last = where[k][1].slice(-1);
@@ -106,12 +108,14 @@ module.exports = class extends Base {
           }
           break;
         }
-        case '!=':
+        case '!=': {
           conditions[parseKey(k) + '?ne'] = where[k][1];
           break;
-        case '>':
+        }
+        case '>': {
           conditions[parseKey(k) + '?gt'] = where[k][1];
           break;
+        }
       }
     }
 

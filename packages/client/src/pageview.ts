@@ -60,7 +60,7 @@ const renderVisitorCount = (
       return;
     }
 
-    element.innerText = count.toString();
+    element.textContent = count.toString();
   });
 };
 
@@ -73,10 +73,7 @@ export const pageviewCount = ({
 }: WalinePageviewCountOptions): WalineAbort => {
   const controller = new AbortController();
 
-  const elements = Array.from(
-    // pageview selectors
-    document.querySelectorAll<HTMLElement>(selector),
-  );
+  const elements = [...document.querySelectorAll<HTMLElement>(selector)];
 
   const filter = (element: HTMLElement): boolean => {
     const query = getQuery(element);
@@ -106,7 +103,7 @@ export const pageviewCount = ({
     }).then((counts) => renderVisitorCount(counts, normalElements));
 
     // if we should fetch count of other pages
-    if (elementsNeedstoBeFetched.length) {
+    if (elementsNeedstoBeFetched.length > 0) {
       void fetch(elementsNeedstoBeFetched);
     }
   }

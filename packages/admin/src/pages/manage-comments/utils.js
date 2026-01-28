@@ -16,7 +16,7 @@ export function formatDate(time) {
   if (typeof time === 'number') {
     d = new Date(time);
   } else {
-    d = new Date(/\d+-\d+-\d+\s\d+:\d+:\d+/.test(time) ? time.replace(/-/g, '/') : time);
+    d = new Date(/\d+-\d+-\d+\s\d+:\d+:\d+/.test(time) ? time.replaceAll('-', '/') : time);
   }
 
   const p = (n) => (n < 10 ? '0' + n : n);

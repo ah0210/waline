@@ -69,7 +69,7 @@ export const RecentComments = ({
     signal: controller.signal,
     token: userInfo.value.token,
   }).then((comments) => {
-    if (root && comments.length) {
+    if (root && comments.length > 0) {
       root.innerHTML = `<ul class="wl-recent-list">${comments
         .map(
           (comment) =>

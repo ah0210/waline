@@ -198,7 +198,7 @@ module.exports = class extends BaseRest {
 
     let usersMap = {};
 
-    if (userIds.length) {
+    if (userIds.length > 0) {
       const users = await this.modelInstance.select({
         objectId: ['IN', userIds],
       });

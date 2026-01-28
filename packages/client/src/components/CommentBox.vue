@@ -138,12 +138,10 @@ const insert = (content: string): void => {
   const textArea = textAreaRef.value!;
   const startPosition = textArea.selectionStart;
   const endPosition = textArea.selectionEnd || 0;
-  const scrollTop = textArea.scrollTop;
+  const { scrollTop } = textArea;
 
   editor.value =
-    textArea.value.substring(0, startPosition) +
-    content +
-    textArea.value.substring(endPosition, textArea.value.length);
+    textArea.value.slice(0, startPosition) + content + textArea.value.slice(endPosition);
   textArea.focus();
   textArea.selectionStart = startPosition + content.length;
   textArea.selectionEnd = startPosition + content.length;
@@ -399,14 +397,14 @@ const onImageWallScroll = async (event: Event): Promise<void> => {
   searchResults.loading = true;
 
   const searchResult =
-    searchOptions.more && searchResults.list.length
+    searchOptions.more && searchResults.list.length > 0
       ? await searchOptions.more(keyword, searchResults.list.length)
       : await searchOptions.search(keyword);
 
-  if (searchResult.length)
+  if (searchResult.length > 0)
     searchResults.list = [
       ...searchResults.list,
-      ...(searchOptions.more && searchResults.list.length
+      ...(searchOptions.more && searchResults.list.length > 0
         ? await searchOptions.more(keyword, searchResults.list.length)
         : await searchOptions.search(keyword)),
     ];

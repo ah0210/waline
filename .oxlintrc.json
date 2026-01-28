@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./.oxlintrc.base.json"],
+  "ignorePatterns": [
+    "coverage/",
+    "dist/",
+    "example/",
+    "**/.vuepress/utils/transform/",
+    "**/.vuepress/utils/csv.js"
+  ],
+  "plugins": ["typescript", "oxc", "import", "jsdoc", "promise", "unicorn", "node"],
+  "rules": {},
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "rules": {
+        // we need `export {}` to convert a file to a module
+        // "unicorn/require-module-specifiers": "off"
+      }
+    },
+    {
+      "files": ["packages/admin/src/**/*.jsx?"],
+      "plugins": ["react"]
+    },
+    {
+      "files": ["packages/api/src/**"],
+      "rules": {
+        "no-warning-comments": "off"
+      }
+    },
+    {
+      "files": ["packages/server/src/**"],
+      "rules": {
+        "no-console": "off",
+        "no-await-in-loop": "off",
+        "require-await": "off"
+      }
+    }
+  ]
+}

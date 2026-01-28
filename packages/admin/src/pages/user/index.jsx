@@ -86,7 +86,7 @@ export default function () {
     ].filter(({ show }) => show);
 
   const getRole = (type) => {
-    if (/^verify/.test(type)) {
+    if (type.startsWith('verify')) {
       return t('verify');
     }
 
@@ -140,7 +140,7 @@ export default function () {
                           <td>
                             <a
                               href={
-                                !/^https:\/\//.test(user.url) ? 'https://' + user.url : user.url
+                                !user.url.startsWith('https://') ? 'https://' + user.url : user.url
                               }
                               rel="external nofollow noreferrer"
                               target="_blank"
@@ -156,8 +156,8 @@ export default function () {
                           <td>{getRole(user.type)}</td>
                           <td>{user.label}</td>
                           <td className="comment-action">
-                            {createActions(user).map(({ key, disable, name, action }) => {
-                              return disable ? (
+                            {createActions(user).map(({ key, disable, name, action }) =>
+                              disable ? (
                                 <span className="weak" key={key}>
                                   {name}
                                 </span>
@@ -170,8 +170,8 @@ export default function () {
                                 >
                                   {name}
                                 </a>
-                              );
-                            })}
+                              ),
+                            )}
                           </td>
                         </tr>
                       ))}

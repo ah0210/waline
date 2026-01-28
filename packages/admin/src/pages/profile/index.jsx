@@ -15,7 +15,7 @@ export default function () {
   const user = useSelector((state) => state.user);
   const { t } = useTranslation();
 
-  const onProfileUpdate = async function (e) {
+  const onProfileUpdate = async (e) => {
     e.preventDefault();
 
     const display_name = e.target.screenName.value;
@@ -30,14 +30,14 @@ export default function () {
     setProfileUpdating(true);
     try {
       await dispatch.user.updateProfile({ display_name, url, label, email });
-    } catch (e) {
-      alert(e);
+    } catch (err) {
+      alert(err);
     } finally {
       setProfileUpdating(false);
     }
   };
 
-  const onPasswordUpdate = async function (e) {
+  const onPasswordUpdate = async (e) => {
     e.preventDefault();
 
     const password = e.target.password.value;
@@ -56,12 +56,12 @@ export default function () {
     setPasswordUpdating(false);
   };
 
-  const unbind = async function (type) {
+  const unbind = async (type) => {
     await updateProfile({ [type]: '' });
     location.reload();
   };
 
-  const changeAvatar = async function (e) {
+  const changeAvatar = async (e) => {
     e.preventDefault();
 
     const url = prompt(t('please input avatar url'));

@@ -122,7 +122,7 @@ module.exports = class extends BaseRest {
 
       if (
         think.isArray(disallowIPList) &&
-        disallowIPList.length &&
+        disallowIPList.length > 0 &&
         disallowIPList.includes(data.ip)
       ) {
         think.logger.debug(`Comment IP ${data.ip} is in disallowIPList`);
@@ -473,10 +473,10 @@ module.exports = class extends BaseRest {
     }
 
     const userModel = this.getModel('Users');
-    const user_ids = Array.from(new Set(comments.map(({ user_id }) => user_id).filter((v) => v)));
+    const user_ids = [...new Set(comments.map(({ user_id }) => user_id).filter((v) => v))];
     let users = [];
 
-    if (user_ids.length) {
+    if (user_ids.length > 0) {
       users = await userModel.select(
         { objectId: ['IN', user_ids] },
         {
@@ -491,12 +491,12 @@ module.exports = class extends BaseRest {
         _complex: {},
       };
 
-      if (user_ids.length) {
+      if (user_ids.length > 0) {
         countWhere._complex.user_id = ['IN', user_ids];
       }
-      const mails = Array.from(new Set(comments.map(({ mail }) => mail).filter((v) => v)));
+      const mails = [...new Set(comments.map(({ mail }) => mail).filter((v) => v))];
 
-      if (mails.length) {
+      if (mails.length > 0) {
         countWhere._complex.mail = ['IN', mails];
       }
       if (!think.isEmpty(countWhere._complex)) {
@@ -610,11 +610,11 @@ module.exports = class extends BaseRest {
     });
 
     const userModel = this.getModel('Users');
-    const user_ids = Array.from(new Set(comments.map(({ user_id }) => user_id).filter((v) => v)));
+    const user_ids = [...new Set(comments.map(({ user_id }) => user_id).filter((v) => v))];
 
     let users = [];
 
-    if (user_ids.length) {
+    if (user_ids.length > 0) {
       users = await userModel.select(
         { objectId: ['IN', user_ids] },
         {
@@ -679,11 +679,11 @@ module.exports = class extends BaseRest {
     });
 
     const userModel = this.getModel('Users');
-    const user_ids = Array.from(new Set(comments.map(({ user_id }) => user_id).filter((v) => v)));
+    const user_ids = [...new Set(comments.map(({ user_id }) => user_id).filter((v) => v))];
 
     let users = [];
 
-    if (user_ids.length) {
+    if (user_ids.length > 0) {
       users = await userModel.select(
         { objectId: ['IN', user_ids] },
         {
@@ -707,7 +707,7 @@ module.exports = class extends BaseRest {
   async getCommentCount() {
     const { url } = this.get();
     const { userInfo } = this.ctx.state;
-    const where = Array.isArray(url) && url.length ? { url: ['IN', url] } : {};
+    const where = Array.isArray(url) && url.length > 0 ? { url: ['IN', url] } : {};
 
     if (think.isEmpty(userInfo) || this.config('storage') === 'deta') {
       where.status = ['NOT IN', ['waiting', 'spam']];

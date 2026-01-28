@@ -75,11 +75,7 @@ export default function () {
           const method = shouldEditorUser ? 'PUT' : 'POST';
           const body =
             tableName === 'Comment'
-              ? Object.assign({}, data, {
-                  rid: undefined,
-                  pid: undefined,
-                  user_id: undefined,
-                })
+              ? { ...data, rid: undefined, pid: undefined, user_id: undefined }
               : data;
 
           for (const key in body) {
@@ -126,7 +122,7 @@ export default function () {
             willUpdateItem[field] = newId;
           }
         });
-        if (!Object.keys(willUpdateItem).length) {
+        if (Object.keys(willUpdateItem).length === 0) {
           continue;
         }
 
