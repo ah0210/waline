@@ -113,7 +113,7 @@ export default function () {
                   {t('input 2fa code')}
                 </label>
                 <input id="code-0-1" name="code" type="text" className="text" />
-                <p className="description"></p>
+                <p className="description" />
               </li>
             </ul>
             <ul className="typecho-option typecho-option-submit">

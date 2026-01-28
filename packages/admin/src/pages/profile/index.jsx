@@ -135,7 +135,7 @@ export default function () {
                         className="text"
                         defaultValue={user.display_name}
                       />
-                      <p className="description"></p>
+                      <p className="description" />
                     </li>
                   </ul>
 
@@ -151,7 +151,7 @@ export default function () {
                         className="text"
                         defaultValue={user.email}
                       />
-                      <p className="description"></p>
+                      <p className="description" />
                     </li>
                   </ul>
 
@@ -189,7 +189,7 @@ export default function () {
                         className="text"
                         defaultValue={user.label}
                       />
-                      <p className="description"></p>
+                      <p className="description" />
                     </li>
                   </ul>
 
@@ -261,7 +261,7 @@ export default function () {
                         autoComplete="new-password"
                       />
                       <p className="description">
-                        <Trans i18nKey="password tips"></Trans>
+                        <Trans i18nKey="password tips" />
                       </p>
                     </li>
                   </ul>
@@ -279,7 +279,7 @@ export default function () {
                         autoComplete="new-password"
                       />
                       <p className="description">
-                        <Trans i18nKey="password again tips"></Trans>
+                        <Trans i18nKey="password again tips" />
                       </p>
                     </li>
                   </ul>

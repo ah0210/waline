@@ -11,6 +11,7 @@ module.exports = class extends think.Logic {
     this.id = this.getId();
   }
 
+  // oxlint-disable-next-line max-statements
   async __before() {
     const referrer = this.ctx.referrer(true);
     let { origin } = this.ctx;
@@ -39,9 +40,10 @@ module.exports = class extends think.Logic {
         // 'api.weibo.com',
         // 'graph.qq.com',
       );
-      secureDomains = secureDomains.concat(
-        this.ctx.state.oauthServices.map(({ origin }) => origin),
-      );
+      secureDomains = [
+        ...secureDomains,
+        ...this.ctx.state.oauthServices.map(({ origin }) => origin),
+      ];
 
       // 转换可能的正则表达式字符串为正则表达式对象
       secureDomains = secureDomains
@@ -62,7 +64,7 @@ module.exports = class extends think.Logic {
         .filter(Boolean); // 过滤掉无效的正则表达式
 
       // 有 referrer 检查 referrer，没有则检查 origin
-      const checking = referrer ? referrer : origin;
+      const checking = referrer || origin;
       const isSafe = secureDomains.some((domain) =>
         think.isFunction(domain.test) ? domain.test(checking) : domain === checking,
       );
@@ -113,19 +115,19 @@ module.exports = class extends think.Logic {
       return;
     }
 
-    const userInfo = user[0];
+    const [userInfo] = user;
 
-    let avatarUrl = userInfo.avatar
-      ? userInfo.avatar
-      : await think.service('avatar').stringify({
-          mail: userInfo.email,
-          nick: userInfo.display_name,
-          link: userInfo.url,
-        });
+    let avatarUrl =
+      userInfo.avatar ||
+      (await think.service('avatar').stringify({
+        mail: userInfo.email,
+        nick: userInfo.display_name,
+        link: userInfo.url,
+      }));
     const { avatarProxy } = think.config();
 
     if (avatarProxy) {
-      avatarUrl = avatarProxy + '?url=' + encodeURIComponent(avatarUrl);
+      avatarUrl = `${avatarProxy}?url=${encodeURIComponent(avatarUrl)}`;
     }
     userInfo.avatar = avatarUrl;
     this.ctx.state.userInfo = userInfo;

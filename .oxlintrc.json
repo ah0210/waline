@@ -19,8 +19,11 @@
       }
     },
     {
-      "files": ["packages/admin/src/**/*.jsx?"],
-      "plugins": ["react"]
+      "files": ["packages/admin/src/**"],
+      "plugins": ["react"],
+      "rules": {
+        "prefer-global-this": "off"
+      }
     },
     {
       "files": ["packages/api/src/**"],
@@ -29,11 +32,24 @@
       }
     },
     {
+      "files": ["packages/client/src/**"],
+      "plugins": ["vue"],
+      "rules": {
+        "prefer-global-this": "off"
+      }
+    },
+    {
       "files": ["packages/server/src/**"],
       "rules": {
         "no-console": "off",
         "no-await-in-loop": "off",
-        "require-await": "off"
+        "require-await": "off",
+        "jsdoc/check-tag-names": [
+          "warn",
+          {
+            "definedTags": ["apiParam", "apiSuccess", "apiVersion", "api", "apiGroup"]
+          }
+        ]
       }
     }
   ]

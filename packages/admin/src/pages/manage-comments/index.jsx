@@ -40,16 +40,16 @@ export default function () {
     [
       'owner',
       [
-        { type: 'all', name: <Trans i18nKey="all"></Trans> },
-        { type: 'mine', name: <Trans i18nKey="mine"></Trans> },
+        { type: 'all', name: <Trans i18nKey="all" /> },
+        { type: 'mine', name: <Trans i18nKey="mine" /> },
       ],
     ],
     [
       'status',
       [
-        { type: 'approved', name: <Trans i18nKey="approved"></Trans> },
-        { type: 'waiting', name: <Trans i18nKey="waiting"></Trans> },
-        { type: 'spam', name: <Trans i18nKey="spam"></Trans> },
+        { type: 'approved', name: <Trans i18nKey="approved" /> },
+        { type: 'waiting', name: <Trans i18nKey="waiting" /> },
+        { type: 'spam', name: <Trans i18nKey="spam" /> },
       ],
     ],
   ];
@@ -306,7 +306,7 @@ export default function () {
                         onClick={() => setActDropStatus(!actDropStatus)}
                       >
                         <i className="sr-only">{t('action')}</i>
-                        {t('selected items')} <i className="i-caret-down"></i>
+                        {t('selected items')} <i className="i-caret-down" />
                       </button>
                       <ul
                         className="dropdown-menu"
@@ -541,7 +541,7 @@ export default function () {
                                 <div
                                   className="comment-content"
                                   dangerouslySetInnerHTML={{ __html: comment }}
-                                ></div>
+                                 />
                                 {cmtHandler.id === objectId && cmtHandler.action === 'reply' ? (
                                   <form className="comment-reply">
                                     <p>
@@ -554,7 +554,7 @@ export default function () {
                                         className="w-90 mono"
                                         rows="3"
                                         ref={replyTextAreaRef}
-                                      ></textarea>
+                                       />
                                     </p>
                                     <p>
                                       <button
