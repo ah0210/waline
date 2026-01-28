@@ -31,7 +31,8 @@
         ]
       }
     ],
-    "no-warning-comments": "off"
+    "no-warning-comments": "off",
+    "prefer-global-this": "off"
   },
   "overrides": [
     {
@@ -45,16 +46,13 @@
       "files": ["packages/admin/src/**"],
       "plugins": ["react"],
       "rules": {
-        "prefer-global-this": "off",
         "react/jsx-max-depth": "off"
       }
     },
     {
       "files": ["packages/client/src/**"],
       "plugins": ["vue"],
-      "rules": {
-        "prefer-global-this": "off"
-      }
+      "rules": {}
     },
     {
       "files": ["packages/server/src/**"],

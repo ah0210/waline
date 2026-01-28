@@ -8,7 +8,7 @@ export default function download(data, filename, type) {
   document.body.append(a);
   a.click();
   setTimeout(() => {
-    document.body.removeChild(a);
+    a.remove();
     window.URL.revokeObjectURL(url);
   }, 0);
 }

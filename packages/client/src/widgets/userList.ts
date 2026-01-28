@@ -119,12 +119,12 @@ export const UserList = ({
             }</span>`,
           user.label && `<span class="wl-badge">${user.label}</span>`,
           '</div>',
-          user.link && user.link,
+          user.link,
           '</div>',
           user.link && '</a>',
           '</li>',
         ]
-          .filter((v) => v)
+          .filter(Boolean)
           .join(''),
       )
       .join('')}</ul>`;
