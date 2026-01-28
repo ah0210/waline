@@ -163,12 +163,7 @@ export default function User() {
                                   {name}
                                 </span>
                               ) : (
-                                <a
-                                  key={key}
-                                  href="javascript:void(0)"
-                                  className={`operate-${key}`}
-                                  onClick={action}
-                                >
+                                <a key={key} className={`operate-${key}`} onClick={action}>
                                   {name}
                                 </a>
                               ),

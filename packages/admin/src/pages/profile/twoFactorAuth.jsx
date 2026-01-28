@@ -43,7 +43,7 @@ export default function TwoFactorAuth() {
     }
 
     setUpdating(true);
-    await updateProfile({ ['2fa']: '' }).catch((err) => {
+    await updateProfile({ '2fa': '' }).catch((err) => {
       alert(err);
       // eslint-disable-next-line no-console
       console.error(err);
