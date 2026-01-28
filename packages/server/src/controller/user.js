@@ -80,7 +80,7 @@ module.exports = class extends BaseRest {
 
     try {
       const notify = this.service('notify', this);
-      const apiUrl = think.buildUrl(this.ctx.serverURL + '/verification', {
+      const apiUrl = think.buildUrl(`${this.ctx.serverURL}/verification`, {
         token,
         email: data.email,
       });
@@ -179,6 +179,7 @@ module.exports = class extends BaseRest {
     return this.success();
   }
 
+  // oxlint-disable-next-line max-statements
   async getUsersListByCount() {
     const { pageSize } = this.get();
     const commentModel = this.getModel('Comment');
@@ -233,7 +234,7 @@ module.exports = class extends BaseRest {
         const { display_name: nick, url: link, avatar: avatarUrl, label } = users[count.user_id];
         const avatar =
           avatarProxy && !avatarUrl.includes(avatarProxy)
-            ? avatarProxy + '?url=' + encodeURIComponent(avatarUrl)
+            ? `${avatarProxy}?url=${encodeURIComponent(avatarUrl)}`
             : avatarUrl;
 
         Object.assign(user, { nick, link, avatar, label });
@@ -255,7 +256,7 @@ module.exports = class extends BaseRest {
       const avatarUrl = await think.service('avatar').stringify(comment);
       const avatar =
         avatarProxy && !avatarUrl.includes(avatarProxy)
-          ? avatarProxy + '?url=' + encodeURIComponent(avatarUrl)
+          ? `${avatarProxy}?url=${encodeURIComponent(avatarUrl)}`
           : avatarUrl;
 
       Object.assign(user, { nick, link, avatar });

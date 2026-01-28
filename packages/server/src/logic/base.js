@@ -195,7 +195,7 @@ module.exports = class extends think.Logic {
       remoteip: this.ctx.ip,
     });
 
-    const requestUrl = method === 'GET' ? api + '?' + query : api;
+    const requestUrl = method === 'GET' ? `${api}?${query}` : api;
     const options =
       method === 'GET'
         ? {}
