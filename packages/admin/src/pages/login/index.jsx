@@ -8,7 +8,8 @@ import * as Icons from '../../components/icon/index.js';
 import { useCaptcha } from '../../components/useCaptcha.js';
 import { get2FAToken } from '../../services/user.js';
 
-export default function () {
+// oxlint-disable-next-line max-lines-per-function
+export default function Login() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

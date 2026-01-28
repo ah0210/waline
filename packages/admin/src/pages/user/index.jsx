@@ -7,7 +7,8 @@ import Paginator from '../../components/Paginator.jsx';
 import { getUserList, updateUser } from '../../services/user.js';
 import { buildAvatar } from '../manage-comments/utils.js';
 
-export default function () {
+// oxlint-disable-next-line max-lines-per-function
+export default function User() {
   const currentUser = useSelector((state) => state.user);
   const { t } = useTranslation();
   const [list, setList] = useState({
@@ -140,7 +141,7 @@ export default function () {
                           <td>
                             <a
                               href={
-                                !user.url.startsWith('https://') ? 'https://' + user.url : user.url
+                                user.url.startsWith('https://') ? user.url : `https://${user.url}`
                               }
                               rel="external nofollow noreferrer"
                               target="_blank"

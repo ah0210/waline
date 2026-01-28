@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// oxlint-disable import/max-dependencies
 /* eslint-disable vue/no-unused-properties */
 
 import { useStyleTag, watchImmediate } from '@vueuse/core';
@@ -16,6 +17,7 @@ import { getConfig, getDarkStyle } from '../utils/index.js';
 import { version } from '../version.js';
 import { configKey, sortingMethods, sortKeyMap } from '../config/index.js';
 
+// oxlint-disable-next-line vue/define-props-destructuring
 const props = defineProps<WalineProps>();
 
 const userInfo = useUserInfo();

@@ -11,6 +11,26 @@
   ],
   "plugins": ["typescript", "oxc", "import", "jsdoc", "promise", "unicorn", "node"],
   "rules": {
+    "id-length": [
+      "warn",
+      {
+        "min": 2,
+        "exceptions": [
+          // sorting
+          "a",
+          "b",
+          // loops
+          "i",
+          "j",
+          // useTranslation
+          "t",
+          // type generics
+          "T",
+          // parameter name for unused variables
+          "_"
+        ]
+      }
+    ],
     "no-warning-comments": "off"
   },
   "overrides": [

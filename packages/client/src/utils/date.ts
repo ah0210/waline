@@ -5,7 +5,7 @@ const padWithZeros = (vNumber: number, width: number): string => {
   let numAsString = vNumber.toString();
 
   while (numAsString.length < width) {
-    numAsString = '0' + numAsString;
+    numAsString = `0${numAsString}`;
   }
 
   return numAsString;

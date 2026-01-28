@@ -208,7 +208,7 @@ export default function ManageComments() {
             list.data = list.data.filter(({ objectId }) => objectId !== comment.objectId);
             setList({ ...list });
           } else {
-            await Promise.all(commentIds.map(deleteComment));
+            await Promise.all(commentIds.map((id) => deleteComment(id)));
             getCommentList({ page: list.page, filter }).then((data) => {
               setList({ ...list, ...data });
               setCommentIds([]);

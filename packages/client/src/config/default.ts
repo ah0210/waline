@@ -25,13 +25,18 @@ export const DEFAULT_REACTION = [
 
 export const defaultUploadImage = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
-    if (file.size > 128 * 1000) return reject(new Error('File too large! File size limit 128KB'));
+    if (file.size > 128 * 1000) {
+      reject(new Error('File too large! File size limit 128KB'));
+
+      return;
+    }
 
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
-    reader.onload = (): void => resolve(reader.result as string);
-    reader.onerror = reject;
+
+    reader.addEventListener('load', () => resolve(reader.result as string));
+    reader.addEventListener('error', reject);
   });
 
 export const defaultTeXRenderer = (blockMode: boolean): string =>
@@ -56,7 +61,7 @@ export const getDefaultSearchOptions = (lang: string): WalineSearchOptions => {
     };
   }
 
-  const fetchGiphy = async (
+  const fetchGiphy = (
     url: string,
     params: Record<string, string> = {},
   ): Promise<WalineSearchResult> =>

@@ -6,7 +6,7 @@ import download from '../../utils/download.js';
 import readFileAsync from '../../utils/readFileAsync.js';
 import request from '../../utils/request.js';
 
-export default function () {
+export default function Migration() {
   const [importLoading, setImportLoading] = useState(false);
   const [exportLoading, setExportLoading] = useState(false);
 
@@ -20,6 +20,7 @@ export default function () {
     uploadRef.current.click();
   };
 
+  // oxlint-disable-next-line max-lines-per-function max-statements
   const importData = async (event) => {
     try {
       const text = await readFileAsync(event.target.files[0]);
@@ -47,8 +48,9 @@ export default function () {
 
         // clean table data if not user table
         if (tableName !== 'Users') {
+          // oxlint-disable-next-line no-await-in-loop
           await request({
-            url: 'db?table=' + tableName,
+            url: `db?table=${tableName}`,
             method: 'DELETE',
           });
         }
@@ -64,14 +66,15 @@ export default function () {
           let existUserObjectId = false;
 
           if (tableName === 'Users') {
-            const user = await request('user?email=' + data.email);
+            // oxlint-disable-next-line no-await-in-loop
+            const user = await request(`user?email=${data.email}`);
 
             if (user.objectId) {
               existUserObjectId = user.objectId;
             }
           }
 
-          const shouldEditorUser = tableName == 'Users' && existUserObjectId;
+          const shouldEditorUser = tableName === 'Users' && existUserObjectId;
           const method = shouldEditorUser ? 'PUT' : 'POST';
           const body =
             tableName === 'Comment'
@@ -85,6 +88,7 @@ export default function () {
             }
           }
 
+          // oxlint-disable-next-line no-await-in-loop
           const resp = await request({
             url: `db?table=${tableName}${method === 'PUT' ? `&objectId=${existUserObjectId}` : ''}`,
             method,
@@ -131,6 +135,7 @@ export default function () {
 
       importedLength = 0;
       for (const [willUpdateItem, where] of willUpdateData) {
+        // oxlint-disable-next-line no-await-in-loop
         await request({
           url: `db?table=Comment&objectId=${where.objectId}`,
           method: 'PUT',

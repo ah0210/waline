@@ -94,7 +94,7 @@ export const pageviewCount = ({
   // we should update pageviews
   if (update) {
     const normalElements = elements.filter((element) => !filter(element));
-    const elementsNeedstoBeFetched = elements.filter(filter);
+    const elementsNeedstoBeFetched = elements.filter((element) => filter(element));
 
     void updatePageview({
       serverURL: getServerURL(serverURL),

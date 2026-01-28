@@ -14,7 +14,6 @@ export default function Profile() {
   const [isProfileUpdating, setProfileUpdating] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // oxlint-disable-next-line id-length
   const { t } = useTranslation();
 
   const onProfileUpdate = async (event) => {
