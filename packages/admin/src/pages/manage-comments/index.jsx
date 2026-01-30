@@ -328,7 +328,19 @@ export default function ManageComments() {
                       >
                         {createActions().map(({ key, name, action }) => (
                           <li key={key}>
-                            <a onClick={action}>{name}</a>
+                            <a
+                              role="button"
+                              tabIndex={0}
+                              onClick={action}
+                              onKeyDown={(event) => {
+                                if (event.key === 'Enter' || event.key === ' ') {
+                                  event.preventDefault();
+                                  action(event);
+                                }
+                              }}
+                            >
+                              {name}
+                            </a>
                           </li>
                         ))}
                       </ul>
