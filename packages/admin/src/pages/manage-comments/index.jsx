@@ -274,7 +274,17 @@ export default function ManageComments() {
                   >
                     {FILTER.map(({ type, name }) => (
                       <li className={cls({ current: type === filter[key] })} key={type}>
-                        <a onClick={() => dispatch({ [key]: type })}>
+                        <a
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => dispatch({ [key]: type })}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault();
+                              dispatch({ [key]: type });
+                            }
+                          }}
+                        >
                           {name}
                           {key === 'status' && type !== 'approved' && list[`${type}Count`] > 0 ? (
                             <span className="balloon">{list[`${type}Count`]}</span>
